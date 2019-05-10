@@ -1,16 +1,18 @@
 <template>
   <div class="container">
-    <search-bar></search-bar>
-    <video-list :videos="videos" @videoSelect="onVideoSelect"></video-list>
-    <video-detail :video="selectedVideo"></video-detail>
+    <search-bar @termChange="onTermChange"></search-bar>
+    <div class="row">
+      <video-detail :video="selectedVideo" class="mb-5 col-md-8"></video-detail>
+      <video-list :videos="videos" @videoSelect="onVideoSelect" class="col-md-4"></video-list>
+    </div>
   </div>
 </template>
 <script>
-// import axios from "axios";
+import axios from "axios";
 import SearchBar from "@/components/SearchBar.vue";
 import VideoList from "@/components/VideoList.vue";
 import VideoDetail from "@/components/VideoDetail.vue";
-// import API from "../config.js";
+import API from "../config.js";
 
 export default {
   name: "App",
@@ -198,9 +200,7 @@ export default {
     VideoDetail
   },
   methods: {
-    /**
-     * @todo - remove comment after API query limit resets
-     * onTermChange(searchTerm) {
+    onTermChange(searchTerm) {
       axios
         .get(`${API.url}`, {
           params: {
@@ -212,8 +212,7 @@ export default {
         })
         .then(response => (this.videos = response.data.items))
         .catch(error => console.log(error));
-    }
-     */
+    },
     onVideoSelect(video) {
       this.selectedVideo = video;
     }
@@ -221,12 +220,8 @@ export default {
 };
 </script>
 <style scoped>
-.container input[type="text"] {
-  width: 75%;
-  margin-bottom: 20px;
-}
 .container {
   text-align: center;
-  margin: 20px;
+  margin-top: 20px;
 }
 </style>
