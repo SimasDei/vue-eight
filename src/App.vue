@@ -1,13 +1,15 @@
 <template>
   <div class="container">
-    <search-bar @termChange="onTermChange"></search-bar>
-    <video-list :videos="videos"></video-list>
+    <search-bar></search-bar>
+    <video-list :videos="videos" @videoSelect="onVideoSelect"></video-list>
+    <video-detail :video="selectedVideo"></video-detail>
   </div>
 </template>
 <script>
 // import axios from "axios";
 import SearchBar from "@/components/SearchBar.vue";
 import VideoList from "@/components/VideoList.vue";
+import VideoDetail from "@/components/VideoDetail.vue";
 // import API from "../config.js";
 
 export default {
@@ -186,33 +188,42 @@ export default {
             liveBroadcastContent: "none"
           }
         }
-      ]
+      ],
+      selectedVideo: null
     };
   },
   components: {
     SearchBar,
-    VideoList
+    VideoList,
+    VideoDetail
   },
   methods: {
-    // onTermChange(searchTerm) {
-    //   axios
-    //     .get(`${API.url}`, {
-    //       params: {
-    //         key: API.key,
-    //         type: "video",
-    //         part: "snippet",
-    //         q: searchTerm
-    //       }
-    //     })
-    //     .then(response => (this.videos = response.data.items))
-    //     .catch(error => console.log(error));
-    // }
+    /**
+     * @todo - remove comment after API query limit resets
+     * onTermChange(searchTerm) {
+      axios
+        .get(`${API.url}`, {
+          params: {
+            key: API.key,
+            type: "video",
+            part: "snippet",
+            q: searchTerm
+          }
+        })
+        .then(response => (this.videos = response.data.items))
+        .catch(error => console.log(error));
+    }
+     */
+    onVideoSelect(video) {
+      this.selectedVideo = video;
+    }
   }
 };
 </script>
 <style scoped>
 .container input[type="text"] {
   width: 75%;
+  margin-bottom: 20px;
 }
 .container {
   text-align: center;
