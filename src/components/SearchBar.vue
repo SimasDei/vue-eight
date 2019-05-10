@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <input type="text" @input="onInput">
-  </div>
+  <input type="text" @input="onInput">
 </template>
 <script>
 export default {

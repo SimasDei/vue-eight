@@ -1,5 +1,5 @@
 <template>
-  <ul>
+  <ul class="list-group">
     <video-list-item v-for="video in videos" :key="video.id.videoId" :video="video"></video-list-item>
   </ul>
 </template>
