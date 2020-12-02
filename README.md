@@ -1,4 +1,4 @@
-# vue-eight
+## vue-eight
 
 ## Project setup
 ```
